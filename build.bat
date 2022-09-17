@@ -1,0 +1,1 @@
+go build -v -o demo.exe -trimpath -ldflags "-s -w -buildid=" ./cmd/demo
