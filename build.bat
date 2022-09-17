@@ -1,1 +1,1 @@
-go build -v -o demo.exe -trimpath -ldflags "-s -w -buildid=" ./cmd/demo
+go build -v -o demo.exe -trimpath -ldflags "-H windowsgui -s -w -buildid=" ./cmd/demo
