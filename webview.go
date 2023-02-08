@@ -39,6 +39,7 @@ type browser interface {
 	Embed(hwnd uintptr) bool
 	Resize()
 	Navigate(url string)
+	NavigateToString(htmlContent string)
 	Init(script string)
 	Eval(script string)
 	NotifyParentWindowPositionChanged() error
@@ -344,6 +345,7 @@ func (w *webview) CreateWithOptions(opts WindowOptions) bool {
 }
 
 func (w *webview) Destroy() {
+	_, _, _ = w32.User32PostMessageW.Call(w.hwnd, w32.WMClose, 0, 0)
 }
 
 func (w *webview) Run() {
@@ -386,6 +388,10 @@ func (w *webview) Window() unsafe.Pointer {
 
 func (w *webview) Navigate(url string) {
 	w.browser.Navigate(url)
+}
+
+func (w *webview) SetHtml(html string) {
+	w.browser.NavigateToString(html)
 }
 
 func (w *webview) SetTitle(title string) {
